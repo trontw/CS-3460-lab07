@@ -209,15 +209,17 @@ public class RBST {
 		 * depending upon the rank.
 		**/
 		if (pb < 1.0 / T.getSize() + 1){
+			//Split the node
 			ret = split(T, rank-1);
+			//Create the new node
 			T = new Node(team, ret[0], ret[1]);
 			return T;
+			//Recursively insert into the left or right subtree depending on the rank
 		} else if ( rank < r) {
 			T.setLeft(insert(T.getLeft(), team, rank));
 		} else {
 			T.setRight(insert(T.getRight(), team, rank));
 		}
-
 		return T;	// Need to return the actual tree. 
 	}
 
