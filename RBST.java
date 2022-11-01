@@ -219,7 +219,7 @@ public class RBST {
 			T.setLeft(insert(T.getLeft(), team, rank));
 			T.incSize();
 		} else {
-			T.setRight(insert(T.getRight(), team, rank - r));//subtract r for the offset into the right subtree
+			T.setRight(insert(T.getRight(), team, rank - r));
 			T.incSize();
 		}
 		return T;	// Need to return the actual tree. 
