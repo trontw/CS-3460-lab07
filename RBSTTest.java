@@ -97,7 +97,7 @@ public class RBSTTest {
 
 		
 
-		///*	// Uncomment this multi-line comment once you have tested insertNormal, and have completed split.
+		/*	// Uncomment this multi-line comment once you have tested insertNormal, and have completed split.
 				// Do not attempt to execute these without thoroughly testing either insertNormal or insert. 
 				// Once you have tested insertNormal, you may comment them again when you are implementing and testing
 				// insert. Then after you have thoroughly tested insert, you may uncomment again.
@@ -135,6 +135,6 @@ public class RBSTTest {
 		System.out.println("Printing the right side of the split.");
 		V[1].print();
 
-		//*/
+		*/
 	}
 }
