@@ -44,8 +44,8 @@ public class RBSTTest {
 			arr[loc] = 100;
 
 			// Insert 100 at that location in the BST.
-			T.insertNormal(100, loc+1);
-			//T.insert(100, loc+1); // Comment insertNormal and uncomment this line once you have implemented insert.
+			//T.insertNormal(100, loc+1);
+			T.insert(100, loc+1); // Comment insertNormal and uncomment this line once you have implemented insert.
 		}
 
 		// Print both the array and the RBST and check if they are the same sequence.
@@ -64,16 +64,16 @@ public class RBSTTest {
 				arr[j] = arr[j-1];
 			arr[loc] = 200;	
 
-			T.insertNormal(200, 1);
-			//T.insert(200, 1);		// Comment insertNormal and uncomment this line once you have implemented insert.
+			//T.insertNormal(200, 1);
+			T.insert(200, 1);		// Comment insertNormal and uncomment this line once you have implemented insert.
 		}
 		// Insert 5 300s at the end.
 		for (int i = 0; i < 5; i++) {
 			int loc = N+15+i;
 			arr[loc] = 300;	
 
-			T.insertNormal(300, T.getSize()+1);
-			//T.insert(300, T.getSize()+1);	// Comment insertNormal and uncomment this line once you have implemented insert.
+			//T.insertNormal(300, T.getSize()+1);
+			T.insert(300, T.getSize()+1);	// Comment insertNormal and uncomment this line once you have implemented insert.
 		}
 
 		// Check if you got the correct output.

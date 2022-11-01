@@ -208,17 +208,19 @@ public class RBST {
 		 * becomes the root. Otherwise recursively insert into left or right subtrees 
 		 * depending upon the rank.
 		**/
-		if (pb < 1.0 / T.getSize() + 1){
-			//Split the node
-			ret = split(T, rank-1);
-			//Create the new node
+		if (pb < 1.0 / (T.getSize() + 1)){
+			//Split the node, making the rank equal to the left node
+			ret = split(T, (rank - 1));
+			//Create the new node, setting both the left and right nodes
 			T = new Node(team, ret[0], ret[1]);
 			return T;
 			//Recursively insert into the left or right subtree depending on the rank
-		} else if ( rank < r) {
+		} else if ( rank <= r) {
 			T.setLeft(insert(T.getLeft(), team, rank));
+			T.incSize();
 		} else {
-			T.setRight(insert(T.getRight(), team, rank));
+			T.setRight(insert(T.getRight(), team, rank - r));//subtract r for the offset into the right subtree
+			T.incSize();
 		}
 		return T;	// Need to return the actual tree. 
 	}
