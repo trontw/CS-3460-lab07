@@ -96,14 +96,61 @@ public class RBST {
 		ret[1] is the root of the right tree of the split.
 	*/
 	private Node[] split(Node T, int rank) {
-		Node [] ret = {null, null};	// ret[0] is the root node to the left side of the split, ret[1] is the right side.	
-		
-		// TODO: Fill your code here for the split method. It is easy to implement this recursively.
+		// ret[0] is the root node to the left side of the split, ret[1] is the right side.	
+		Node [] ret = {null, null};	
+		// Determine the rank of the root by using the left node size
+		if (T == null)
+			r = 0;
+		else if (T.getLeft() != null) 
+			r =T.getLeft().getSize() + 1;
+		 else if (T.getLeft() == null) 
+			r = 1;
+		// Fill your code here for the split method. It is easy to implement this recursively.
 		// Your base case will be an empty tree. Your recursive case will have three cases -- think 
 		// what happens if the rank of the root == rank, or if rank is smaller or larger than the rank
 		// of the root.
-		
-		
+		// rank of root = rank
+		Node [] R1 = ret;
+		Node [] L1 = ret;
+		Node [] ret_ = ret;
+		if (T == null) {
+			ret[0] = ret[1] = null;
+		}
+		else if (rank == r) {
+			ret[1] = T.getRight();
+			ret[0] = T;//L = T (from the slides)
+			T.setRight(null);
+			//ret[0].setRight(null);
+			if (ret[0] != null)
+				ret[0].updateSize();
+			if (ret[1] != null)
+				ret[1].updateSize();
+			return ret;
+		// rank < rank of the root
+		} else if (rank < r) {
+			ret_ = split(T.getLeft(), rank);//just the L (<= k) node (which is now ret_[0])
+			//ret[0] = ret_[0];
+			ret[0] = ret_[0];
+			ret[1] = T;// R = T (from the slides), connecting ret[1] back to T
+			T.setLeft(ret_[1]);//connect ret_[1] back to the original T
+			//if (ret[0] != null)
+			//	ret[0].updateSize();
+			if (ret[1] != null)
+				ret[1].updateSize();
+		}
+		// rank > rank of the root
+		if (rank > r){
+			ret_ = split(T.getRight(), rank -r);
+			//ret[1] = ret_[1];
+			ret[1] = ret_[1];
+			ret[0] = T;// L = T, connecting ret[0] back to T
+			T.setRight(ret_[0]);
+			//System.out.println("We found two children (RANK > r)");
+			if (ret[0] != null)
+				ret[0].updateSize();
+			//if (ret[1] != null)
+			//	ret[1].updateSize();
+			} 
 		return ret;
 	}
 	
