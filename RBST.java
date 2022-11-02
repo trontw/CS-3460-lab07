@@ -63,11 +63,11 @@ public class RBST {
 			return new Node(team);
 		}
 		// Determine the rank of the root by using the left node size
-		if (T.getLeft() != null) 
-			r =T.getLeft().getSize() + 1;
-		 else if (T.getLeft() == null) 
-			r = 1;
-		
+		// if (T.getLeft() != null) 
+		// 	r =T.getLeft().getSize() + 1;
+		//  else if (T.getLeft() == null) 
+		// 	r = 1;
+		int r = rank(T);
 		// Recursive case. Recursively insert into left tree if rank <= rank of root. Otherwise insert into right tree.
 		if (rank <= r) {			
 			T.setLeft(insertNormal(T.getLeft(), team, rank));
@@ -76,8 +76,8 @@ public class RBST {
 		} else {
 			T.setRight(insertNormal(T.getRight(), team, rank - r));
 			//System.out.println("Adding "+team+" to the Right Tree");
-			T.incSize();
 		}
+		T.updateSize();
 		return T;	// Need to return the actual tree. 
 	}
 	
@@ -104,19 +104,20 @@ public class RBST {
 		Node [] ret = {null, null};	
 		// Determine the rank of the root by using the left node size
 		if (T == null)
-			r = 0;
-		else if (T.getLeft() != null) 
-			r =T.getLeft().getSize() + 1;
-		 else if (T.getLeft() == null) 
-			r = 1;
+			return ret;
+
+		int r = rank(T);
 		// rank of root = rank
 		Node [] R1 = ret;
 		Node [] L1 = ret;
 		Node [] ret_ = ret;
+		
+		/* 
 		if (T == null) {
 			ret[0] = ret[1] = null;
 		}
-		else if (rank == r) {
+		*/
+		if (rank == r) {
 			ret[1] = T.getRight();
 			ret[0] = T;//L = T (from the slides)
 			T.setRight(null);
@@ -133,8 +134,8 @@ public class RBST {
 			ret[0] = ret_[0];
 			ret[1] = T;// R = T (from the slides), connecting ret[1] back to T
 			T.setLeft(ret_[1]);//connect ret_[1] back to the original T
-			//if (ret[0] != null)
-			//	ret[0].updateSize();
+			if (ret[0] != null)
+				ret[0].updateSize();
 			if (ret[1] != null)
 				ret[1].updateSize();
 		}
@@ -148,8 +149,8 @@ public class RBST {
 			//System.out.println("We found two children (RANK > r)");
 			if (ret[0] != null)
 				ret[0].updateSize();
-			//if (ret[1] != null)
-			//	ret[1].updateSize();
+			if (ret[1] != null)
+				ret[1].updateSize();
 			} 
 		return ret;
 	}
@@ -173,7 +174,7 @@ public class RBST {
 	*/
 	private Node insert(Node T, int team, int rank) {
 		// ret[0] is the root node to the left side of the split, ret[1] is the right side.	
-		Node [] ret = {null, null};	
+		Node [] ret = {null, null};
 		double pb = rand.nextDouble();
 		// rank of root = rank
 		Node [] R1 = ret;
@@ -193,16 +194,13 @@ public class RBST {
 			//System.out.println("Rank is "+rank);
 			//System.out.println("Adding "+team+" to the Tree");
 			return new Node(team);
-		}
-		
+		}	
 		// Determine the rank of the root by using the left node size
-		if (T == null)
-			r = 0;
-		else if (T.getLeft() != null) 
-			r =T.getLeft().getSize() + 1;
-		else if (T.getLeft() == null) 
-			r = 1;
-		
+		// if (T.getLeft() != null) 
+		// 	r =T.getLeft().getSize() + 1;
+		// else if (T.getLeft() == null) 
+		// 	r = 1;
+		int r = rank(T);
 		/** Recursive case. 
 		 * With probability 1 / (T.getSize() + 1), the new node 
 		 * becomes the root. Otherwise recursively insert into left or right subtrees 
@@ -247,8 +245,9 @@ public class RBST {
 		**/ 
 		// Determine the rank of the root by using the left node size
 		if (T == null)
-			r = 0;
-		else if (T.getLeft() == null) 
+			return new Node(rank);
+		
+		if (T.getLeft() == null) 
 			r = 1;
 		else //(T.getLeft() != null) 
 			r =T.getLeft().getSize() + 1;
@@ -270,4 +269,19 @@ public class RBST {
 		if (root == null) return 0;
 		return root.getSize();
 	}
+
+	/**
+	 *  Returns rank of Node T
+	 */
+	public int rank(Node T) {
+		int r = 0;
+		if (T == null)
+			r = 0;
+		else if (T.getLeft() == null)
+			r = 1;
+		else 
+			r = T.getLeft().getSize() + 1;//Node to the left of root
+		return r;
+	}
+
 }

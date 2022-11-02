@@ -20,8 +20,8 @@ public class RBSTTest {
 		// Insert the array into a RBST. Since the rank is between 1 and n instead of 0 and n-1, we need to add 1 to i to get the actual rank.
 		RBST T = new RBST();
 		for (int i = 0; i < N; i++) {
-			T.insertNormal(arr[i], i+1);
-			//T.insert(arr[i], i+1); // Comment insertNormal and uncomment this line once you have implemented insert.
+			//T.insertNormal(arr[i], i+1);
+			T.insert(arr[i], i+1); // Comment insertNormal and uncomment this line once you have implemented insert.
 		}
 		
 		
