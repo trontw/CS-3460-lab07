@@ -67,4 +67,5 @@ public class Node {
 	public void updateSize() {
 		size = ((left == null) ? 0 : left.size) + ((right == null) ? 0 : right.size) + 1;
 	}
+    
 }

@@ -13,9 +13,9 @@ public class OrderingTeams {
 	// Return a RBST encoding a valid ordering.
 	public static RBST orderTeams(int N) {
 		RBST O = new RBST();
-
+		
 		O.insert(0, 1);
-	
+		
 		for (int i = 1; i < N; i++) {	
 			if (didXBeatY(i, O.select(1).getTeam())) {
 				O.insert(i, 1);
@@ -24,17 +24,37 @@ public class OrderingTeams {
 				O.insert(i, O.getSize()+1);
 			}
 			else {
-					// TODO: Binary Search the sequence to find the valid position to insert team i.	
-				}
+				//Binary Search the sequence to find the valid position to insert team i.
+					int start = 1;
+					int end = O.getSize();
+					System.out.println("End is = "+end);
+					while ((start + 1) < end){
+						int mid = ((start + end)/ 2);
+						if (((didXBeatY(i, O.select(mid).getTeam()))) && (!didXBeatY(i, O.select(mid -1).getTeam()))){
+						//if ((didXBeatY(i, O.select(mid).getTeam()))){
+							end  = mid;
+						}else {	
+							start = mid;
+						}
+					}
+				//if (!didXBeatY(i, O.select(end).getTeam()) && (didXBeatY(i, O.select(end + 2).getTeam()))){
+				//	if (O.select(end + 2).getTeam() < O.select(O.getSize()).getTeam()){
+				//		O.insert(i, end + 1);
 				//System.out.println("inserting " + i + " at position " + end);
-				O.insert(i, end);
+				//end++;
+				//}
+					System.out.println("inserting " + i + " at position " + end);
+					O.insert(i, end);
+				}
 			}
+			return O;
 		}
-		return O;
-	}
+		//return O;
+	
 
 	public static void main(String [] args) {
-		int N = 100000;
+		//int N = 100000;
+		int N = 100;
 		RBST ordering = orderTeams(N);
 		if (ordering == null || ordering.getSize() != N) {
 			System.out.println("Size of Tree returned by orderTeam(N) is wrong.");
@@ -50,6 +70,6 @@ public class OrderingTeams {
 			}
 		}
 		System.out.println("Yay! Tree contains a valid ordering.");
-		//ordering.print(); You can print the ordreing. But realize that N = 100000, so the ordering will fill your entire screen. Try to set N to something more manageable, like N = 100 and then print it out.
+		ordering.print(); //You can print the ordering. But realize that N = 100000, so the ordering will fill your entire screen. Try to set N to something more manageable, like N = 100 and then print it out.
 	}
 }
