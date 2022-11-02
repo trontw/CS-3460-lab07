@@ -31,26 +31,9 @@ public class OrderingTeams {
 					System.out.println("k is = "+end);
 					while (start < end - 1){
 						int mid = ((start + end)/ 2);
-						//if ((!didXBeatY(i, O.select(mid -1).getTeam())) && ((didXBeatY(i, O.select(mid).getTeam())))){
-						//if ((!didXBeatY(i, O.select(mid -1).getTeam()))) {
-						/* 
-						if (start == end){
-							System.out.println("Found HAPPY PLACE");
-							end = start;
-							return O;
-							//moves before mid, start going <-- direction
-						 } 
-						 else if (start == (end - 1)){
-						 //if ((didXBeatY(i, O.select(mid).getTeam()))){
-							System.out.println(i+" beat "+mid+" <---");
-							//start  = end;
-							end = start;
-							//return O;
-							//move after mid, start going ---> direction	
-						}
-						*/
+
 						if (didXBeatY(i, O.select(mid).getTeam())){
-							System.out.println(i+" lost to "+mid+" --->");
+							//System.out.println(i+" lost to "+mid+" --->");
 							//start = mid;
 							end = mid;
 						} else {
@@ -59,8 +42,7 @@ public class OrderingTeams {
 						}
 					}
 					System.out.println("inserting " + i + " at position " + end);
-					//if (O.select(i) != null || O.select(end) != null)
-						O.insert(i, end);
+					O.insert(i, end);
 				}
 			}
 			return O;
@@ -69,8 +51,8 @@ public class OrderingTeams {
 	
 
 	public static void main(String [] args) {
-		//int N = 100000;
-		int N = 100;
+		int N = 100000;
+		//int N = 100;
 		RBST ordering = orderTeams(N);
 		if (ordering == null || ordering.getSize() != N) {
 			System.out.println("Size of Tree returned by orderTeam(N) is wrong.");
@@ -86,6 +68,6 @@ public class OrderingTeams {
 			}
 		}
 		System.out.println("Yay! Tree contains a valid ordering.");
-		ordering.print(); //You can print the ordering. But realize that N = 100000, so the ordering will fill your entire screen. Try to set N to something more manageable, like N = 100 and then print it out.
+		//ordering.print(); //You can print the ordering. But realize that N = 100000, so the ordering will fill your entire screen. Try to set N to something more manageable, like N = 100 and then print it out.
 	}
 }

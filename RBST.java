@@ -247,11 +247,11 @@ public class RBST {
 		if (T == null)
 			return new Node(rank);
 		
-		if (T.getLeft() == null) 
-			r = 1;
-		else //(T.getLeft() != null) 
-			r =T.getLeft().getSize() + 1;
-
+		// if (T.getLeft() == null) 
+		// 	r = 1;
+		// else //(T.getLeft() != null) 
+		// 	r =T.getLeft().getSize() + 1;
+		int r = rank(T);
 		//Compare rank to root's rank: Return T if equal
 		if (rank == r)
 			return T;
