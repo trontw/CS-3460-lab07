@@ -28,7 +28,7 @@ public class OrderingTeams {
 				//Binary Search the sequence to find the valid position to insert team i.
 					int start = 1;
 					int end = O.getSize();
-					System.out.println("k is = "+end);
+					//System.out.println("k is = "+end);
 					while (start < end - 1){
 						int mid = ((start + end)/ 2);
 
